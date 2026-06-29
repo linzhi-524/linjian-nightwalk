@@ -1,0 +1,2046 @@
+{
+  "version": "0.2",
+  "events": [
+    {
+      "id": "f_call",
+      "location": "雾林",
+      "title": "雾中呼名",
+      "text": "雾里有人叫出你的名字，声音从身后传来。",
+      "choices": {
+        "A": {
+          "text": "回头",
+          "result": "你转过身。",
+          "ops": [
+            {
+              "op": "chance",
+              "branches": [
+                {
+                  "p": 0.5,
+                  "text": "无脸旅人站在雾里。",
+                  "ops": [
+                    {
+                      "op": "stat",
+                      "key": "clues",
+                      "amount": 1,
+                      "text": "线索+1"
+                    },
+                    {
+                      "op": "trait",
+                      "key": "好奇"
+                    }
+                  ]
+                },
+                {
+                  "p": 0.5,
+                  "text": "身后空无一人，耳边却响起呼吸声。",
+                  "ops": [
+                    {
+                      "op": "stat",
+                      "key": "hp",
+                      "amount": -2,
+                      "text": "体力-2"
+                    },
+                    {
+                      "op": "trait",
+                      "key": "好奇"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "B": {
+          "text": "加快脚步",
+          "result": "你没有回头。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "hp",
+              "amount": -1,
+              "text": "体力-1"
+            },
+            {
+              "op": "trait",
+              "key": "谨慎"
+            }
+          ]
+        },
+        "C": {
+          "text": "点亮提灯等待",
+          "result": "灯光照出一个慢半拍的影子。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "lamp_oil",
+              "amount": -1,
+              "text": "灯油-1"
+            },
+            {
+              "op": "flag",
+              "key": "shadow_unlocked",
+              "value": true
+            },
+            {
+              "op": "trait",
+              "key": "勇敢"
+            }
+          ],
+          "requires": {
+            "traits_min": {
+              "勇敢": 0
+            }
+          }
+        }
+      },
+      "once": false,
+      "weight": 3
+    },
+    {
+      "id": "f_crow",
+      "location": "雾林",
+      "title": "叼钥匙的乌鸦",
+      "text": "乌鸦嘴里叼着一把生锈钥匙。",
+      "choices": {
+        "A": {
+          "text": "用食物交换",
+          "result": "乌鸦叼走食物，留下钥匙。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "food",
+              "amount": -1,
+              "text": "食物-1"
+            },
+            {
+              "op": "item_add",
+              "item": "生锈钥匙"
+            },
+            {
+              "op": "trait",
+              "key": "善意"
+            }
+          ],
+          "requires": {
+            "flags_none": [
+              "no_food"
+            ]
+          }
+        },
+        "B": {
+          "text": "尝试抓住乌鸦",
+          "result": "你扑向枯枝。",
+          "ops": [
+            {
+              "op": "chance",
+              "branches": [
+                {
+                  "p": 0.4,
+                  "text": "你竟然抓住了钥匙。",
+                  "ops": [
+                    {
+                      "op": "item_add",
+                      "item": "生锈钥匙"
+                    },
+                    {
+                      "op": "trait",
+                      "key": "贪心"
+                    }
+                  ]
+                },
+                {
+                  "p": 0.6,
+                  "text": "乌鸦啄了你一下后飞走。",
+                  "ops": [
+                    {
+                      "op": "stat",
+                      "key": "hp",
+                      "amount": -1,
+                      "text": "体力-1"
+                    },
+                    {
+                      "op": "trait",
+                      "key": "贪心"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "C": {
+          "text": "告诉乌鸦一个秘密",
+          "result": "乌鸦收走秘密，留下黑羽标记。",
+          "ops": [
+            {
+              "op": "item_add",
+              "item": "黑羽标记"
+            },
+            {
+              "op": "flag",
+              "key": "crow_secret",
+              "value": true
+            },
+            {
+              "op": "trait",
+              "key": "好奇"
+            }
+          ]
+        }
+      },
+      "once": false,
+      "weight": 3
+    },
+    {
+      "id": "f_tree",
+      "location": "雾林",
+      "title": "倒着生长的树",
+      "text": "树根伸向天空，枝叶却钻进土里。",
+      "choices": {
+        "A": {
+          "text": "挖开泥土",
+          "result": "你挖到了埋藏物。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "hp",
+              "amount": -1,
+              "text": "体力-1"
+            },
+            {
+              "op": "chance",
+              "branches": [
+                {
+                  "p": 0.55,
+                  "text": "三枚古币滚进掌心。",
+                  "ops": [
+                    {
+                      "op": "stat",
+                      "key": "coins",
+                      "amount": 3,
+                      "text": "金币+3"
+                    }
+                  ]
+                },
+                {
+                  "p": 0.45,
+                  "text": "你挖出夜钥匙碎片。",
+                  "ops": [
+                    {
+                      "op": "item_add",
+                      "item": "夜钥匙碎片"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "op": "trait",
+              "key": "好奇"
+            }
+          ]
+        },
+        "B": {
+          "text": "绕开",
+          "result": "你绕过了怪树。",
+          "ops": [
+            {
+              "op": "trait",
+              "key": "谨慎"
+            }
+          ]
+        },
+        "C": {
+          "text": "把空玻璃瓶放在树根下",
+          "result": "瓶中聚起发光的根露。",
+          "ops": [
+            {
+              "op": "item_remove",
+              "item": "空玻璃瓶"
+            },
+            {
+              "op": "item_add",
+              "item": "根露"
+            }
+          ],
+          "requires": {
+            "items_all": [
+              "空玻璃瓶"
+            ]
+          },
+          "blocked_text": "你没有空玻璃瓶。"
+        }
+      },
+      "once": false,
+      "weight": 2
+    },
+    {
+      "id": "f_fire",
+      "location": "雾林",
+      "title": "没有脚印的营火",
+      "text": "前方有一堆刚熄灭的火，却没有任何脚印。",
+      "choices": {
+        "A": {
+          "text": "搜索营地",
+          "result": "你找到一份尚未受潮的食物。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "food",
+              "amount": 1,
+              "text": "食物+1"
+            }
+          ]
+        },
+        "B": {
+          "text": "重新点燃营火",
+          "result": "火焰重新亮起。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "lamp_oil",
+              "amount": -1,
+              "text": "灯油-1"
+            },
+            {
+              "op": "stat",
+              "key": "hp",
+              "amount": 2,
+              "text": "体力+2"
+            }
+          ]
+        },
+        "C": {
+          "text": "立刻离开",
+          "result": "你没有停留。",
+          "ops": [
+            {
+              "op": "trait",
+              "key": "谨慎"
+            }
+          ]
+        }
+      },
+      "once": false,
+      "weight": 3
+    },
+    {
+      "id": "f_stall",
+      "location": "雾林",
+      "title": "林间售货亭",
+      "text": "柜台上写着：拿走一样，也要留下同等价值的东西。",
+      "choices": {
+        "A": {
+          "text": "留下1金币，拿走绷带",
+          "result": "交易完成。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "coins",
+              "amount": -1,
+              "text": "金币-1"
+            },
+            {
+              "op": "item_add",
+              "item": "绷带"
+            }
+          ]
+        },
+        "B": {
+          "text": "留下1条线索，拿走旧地图",
+          "result": "交易完成。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "clues",
+              "amount": -1,
+              "text": "线索-1"
+            },
+            {
+              "op": "item_add",
+              "item": "雾林旧地图"
+            }
+          ]
+        },
+        "C": {
+          "text": "什么都不拿",
+          "result": "木牌轻轻响了一声。",
+          "ops": [
+            {
+              "op": "flag",
+              "key": "honest_visitor",
+              "value": true
+            },
+            {
+              "op": "trait",
+              "key": "谨慎"
+            }
+          ]
+        }
+      },
+      "once": false,
+      "weight": 2
+    },
+    {
+      "id": "f_deer",
+      "location": "雾林",
+      "title": "被困住的小鹿",
+      "text": "小鹿的腿被铁丝缠住，附近却有明显的人类脚印。",
+      "choices": {
+        "A": {
+          "text": "割断铁丝救它",
+          "result": "小鹿消失在雾里。",
+          "ops": [
+            {
+              "op": "trait",
+              "key": "善意",
+              "amount": 2
+            },
+            {
+              "op": "flag",
+              "key": "deer_saved",
+              "value": true
+            }
+          ],
+          "requires": {
+            "items_all": [
+              "折叠小刀"
+            ]
+          }
+        },
+        "B": {
+          "text": "检查附近陷阱",
+          "result": "你拆下铁丝，并发现猎人的脚印。",
+          "ops": [
+            {
+              "op": "item_add",
+              "item": "铁丝"
+            },
+            {
+              "op": "stat",
+              "key": "clues",
+              "amount": 1,
+              "text": "线索+1"
+            }
+          ]
+        },
+        "C": {
+          "text": "不靠近",
+          "result": "你保持距离。",
+          "ops": [
+            {
+              "op": "trait",
+              "key": "谨慎"
+            }
+          ]
+        }
+      },
+      "once": true,
+      "weight": 2
+    },
+    {
+      "id": "f_pool",
+      "location": "雾林",
+      "title": "没有倒影的水潭",
+      "text": "水潭能照出树木，却照不出你。",
+      "choices": {
+        "A": {
+          "text": "把手伸进水里",
+          "result": "冰冷的水吞没手腕。",
+          "ops": [
+            {
+              "op": "chance",
+              "branches": [
+                {
+                  "p": 0.5,
+                  "text": "你感到前所未有的清醒。",
+                  "ops": [
+                    {
+                      "op": "stat",
+                      "key": "hp",
+                      "amount": 2,
+                      "text": "体力+2"
+                    }
+                  ]
+                },
+                {
+                  "p": 0.5,
+                  "text": "寒意钻进骨头。",
+                  "ops": [
+                    {
+                      "op": "flag",
+                      "key": "cold",
+                      "value": true
+                    },
+                    {
+                      "op": "stat",
+                      "key": "hp",
+                      "amount": -1,
+                      "text": "体力-1"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "B": {
+          "text": "投入1枚金币",
+          "result": "水面浮出一句模糊预言。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "coins",
+              "amount": -1,
+              "text": "金币-1"
+            },
+            {
+              "op": "stat",
+              "key": "clues",
+              "amount": 1,
+              "text": "线索+1"
+            }
+          ]
+        },
+        "C": {
+          "text": "砸碎水面",
+          "result": "水面裂开，像一面玻璃。",
+          "ops": [
+            {
+              "op": "item_add",
+              "item": "镜水碎片"
+            },
+            {
+              "op": "flag",
+              "key": "pool_hostile",
+              "value": true
+            },
+            {
+              "op": "trait",
+              "key": "勇敢"
+            }
+          ]
+        }
+      },
+      "once": false,
+      "weight": 2
+    },
+    {
+      "id": "f_shadow",
+      "location": "雾林",
+      "title": "灯下影子",
+      "text": "你的影子比本人慢了半拍。",
+      "choices": {
+        "A": {
+          "text": "观察影子",
+          "result": "影子悄悄指向森林更深处。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "clues",
+              "amount": 1,
+              "text": "线索+1"
+            },
+            {
+              "op": "trait",
+              "key": "好奇"
+            }
+          ]
+        },
+        "B": {
+          "text": "用刀刺向影子",
+          "result": "刀尖割下一缕黑色影线。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "hp",
+              "amount": -1,
+              "text": "体力-1"
+            },
+            {
+              "op": "item_add",
+              "item": "影线"
+            }
+          ]
+        },
+        "C": {
+          "text": "立刻熄灯",
+          "result": "影子恢复正常。",
+          "ops": [
+            {
+              "op": "trait",
+              "key": "谨慎"
+            }
+          ]
+        }
+      },
+      "once": true,
+      "weight": 1,
+      "requires": {
+        "flags_all": [
+          "shadow_unlocked"
+        ]
+      }
+    },
+    {
+      "id": "f_faceless",
+      "location": "雾林",
+      "title": "无脸旅人的请求",
+      "text": "没有五官的人请你替他找回名字。",
+      "choices": {
+        "A": {
+          "text": "答应",
+          "result": "你接下了“失落的名字”。",
+          "ops": [
+            {
+              "op": "flag",
+              "key": "find_name",
+              "value": true
+            },
+            {
+              "op": "trait",
+              "key": "善意"
+            }
+          ]
+        },
+        "B": {
+          "text": "随便给他起个名字",
+          "result": "旅人安静地接受了。",
+          "ops": [
+            {
+              "op": "chance",
+              "branches": [
+                {
+                  "p": 0.5,
+                  "text": "他送你一枚护符。",
+                  "ops": [
+                    {
+                      "op": "item_add",
+                      "item": "无脸护符"
+                    }
+                  ]
+                },
+                {
+                  "p": 0.5,
+                  "text": "那个错误名字像刺一样留在耳边。",
+                  "ops": [
+                    {
+                      "op": "flag",
+                      "key": "wrong_name",
+                      "value": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "C": {
+          "text": "拒绝",
+          "result": "旅人沉默地转过头。",
+          "ops": [
+            {
+              "op": "flag",
+              "key": "faceless_refused",
+              "value": true
+            }
+          ]
+        }
+      },
+      "once": true,
+      "weight": 1
+    },
+    {
+      "id": "f_door",
+      "location": "雾林",
+      "title": "雾林深处的门",
+      "text": "一扇孤零零立在林中的门，后面什么都没有。",
+      "choices": {
+        "A": {
+          "text": "用生锈钥匙开门",
+          "result": "门后是一片无风的湖光。",
+          "ops": [
+            {
+              "op": "item_remove",
+              "item": "生锈钥匙"
+            },
+            {
+              "op": "key",
+              "amount": 1
+            }
+          ],
+          "requires": {
+            "items_all": [
+              "生锈钥匙"
+            ]
+          },
+          "blocked_text": "你没有生锈钥匙。"
+        },
+        "B": {
+          "text": "直接推门",
+          "result": "你被一股力量抛回雾中。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "hp",
+              "amount": -2,
+              "text": "体力-2"
+            },
+            {
+              "op": "trait",
+              "key": "勇敢"
+            }
+          ]
+        },
+        "C": {
+          "text": "在门上留下记号",
+          "result": "门板从里面轻轻敲了一下。",
+          "ops": [
+            {
+              "op": "flag",
+              "key": "door_mark",
+              "value": true
+            },
+            {
+              "op": "trait",
+              "key": "好奇"
+            }
+          ]
+        }
+      },
+      "once": false,
+      "weight": 2
+    },
+    {
+      "id": "f_mark_reply",
+      "location": "雾林",
+      "title": "被回应的记号",
+      "text": "你上次留下的记号旁，多出了一行陌生字：带名字来。",
+      "choices": {
+        "A": {
+          "text": "抄下字迹",
+          "result": "你得到一段关于名字的线索。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "clues",
+              "amount": 1,
+              "text": "线索+1"
+            },
+            {
+              "op": "flag",
+              "key": "name_hint",
+              "value": true
+            }
+          ]
+        },
+        "B": {
+          "text": "擦掉记号",
+          "result": "门后的敲击声停了。",
+          "ops": [
+            {
+              "op": "flag",
+              "key": "door_mark",
+              "value": false
+            },
+            {
+              "op": "trait",
+              "key": "谨慎"
+            }
+          ]
+        },
+        "C": {
+          "text": "写下自己的名字",
+          "result": "木门吸走墨迹，吐出一枚白色字片。",
+          "ops": [
+            {
+              "op": "item_add",
+              "item": "白色字片"
+            },
+            {
+              "op": "trait",
+              "key": "勇敢"
+            }
+          ]
+        }
+      },
+      "once": true,
+      "weight": 1,
+      "requires": {
+        "flags_all": [
+          "door_mark"
+        ]
+      }
+    },
+    {
+      "id": "f_deer_return",
+      "location": "雾林",
+      "title": "小鹿引路",
+      "text": "被救过的小鹿站在雾中，示意你跟上。",
+      "choices": {
+        "A": {
+          "text": "跟随它",
+          "result": "它带你找到一处安全泉眼。",
+          "ops": [
+            {
+              "op": "heal_full",
+              "text": "体力完全恢复"
+            },
+            {
+              "op": "stat",
+              "key": "trust",
+              "amount": 1,
+              "text": "信任+1"
+            }
+          ]
+        },
+        "B": {
+          "text": "只记住路线",
+          "result": "你记下了一条捷径。",
+          "ops": [
+            {
+              "op": "item_add",
+              "item": "鹿径地图"
+            },
+            {
+              "op": "trait",
+              "key": "谨慎"
+            }
+          ]
+        },
+        "C": {
+          "text": "让它离开",
+          "result": "小鹿回头看了你一眼。",
+          "ops": [
+            {
+              "op": "trait",
+              "key": "善意"
+            }
+          ]
+        }
+      },
+      "once": true,
+      "weight": 1,
+      "requires": {
+        "flags_all": [
+          "deer_saved"
+        ]
+      }
+    },
+    {
+      "id": "f_name_found",
+      "location": "雾林",
+      "title": "失落的名字",
+      "text": "白色字片在无脸旅人面前发出微光。",
+      "choices": {
+        "A": {
+          "text": "把字片交给他",
+          "result": "旅人终于拥有了名字。",
+          "ops": [
+            {
+              "op": "item_remove",
+              "item": "白色字片"
+            },
+            {
+              "op": "item_add",
+              "item": "旅人赠礼"
+            },
+            {
+              "op": "key",
+              "amount": 1,
+              "text": "旅人将一把夜钥匙交给你。"
+            },
+            {
+              "op": "flag",
+              "key": "name_quest_done",
+              "value": true
+            },
+            {
+              "op": "trait",
+              "key": "善意",
+              "amount": 2
+            }
+          ]
+        },
+        "B": {
+          "text": "自己保留字片",
+          "result": "字片在掌心变得更亮。",
+          "ops": [
+            {
+              "op": "trait",
+              "key": "贪心",
+              "amount": 2
+            },
+            {
+              "op": "flag",
+              "key": "kept_name",
+              "value": true
+            }
+          ]
+        },
+        "C": {
+          "text": "问他真正的名字",
+          "result": "他只说：名字属于愿意记住它的人。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "clues",
+              "amount": 2,
+              "text": "线索+2"
+            },
+            {
+              "op": "trait",
+              "key": "好奇"
+            }
+          ]
+        }
+      },
+      "once": true,
+      "weight": 1,
+      "requires": {
+        "flags_all": [
+          "find_name",
+          "name_hint"
+        ],
+        "items_all": [
+          "白色字片"
+        ]
+      }
+    },
+    {
+      "id": "f_root_bargain",
+      "location": "雾林",
+      "title": "树根下的交换",
+      "text": "倒生树的根须缠住夜钥匙碎片，等待你的选择。",
+      "choices": {
+        "A": {
+          "text": "献上根露",
+          "result": "树根松开，碎片合成夜钥匙。",
+          "ops": [
+            {
+              "op": "item_remove",
+              "item": "根露"
+            },
+            {
+              "op": "item_remove",
+              "item": "夜钥匙碎片"
+            },
+            {
+              "op": "key",
+              "amount": 1
+            }
+          ],
+          "requires": {
+            "items_all": [
+              "根露",
+              "夜钥匙碎片"
+            ]
+          }
+        },
+        "B": {
+          "text": "割断根须",
+          "result": "你抢下碎片，却被枝条划伤。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "hp",
+              "amount": -2,
+              "text": "体力-2"
+            },
+            {
+              "op": "trait",
+              "key": "贪心"
+            }
+          ]
+        },
+        "C": {
+          "text": "离开",
+          "result": "你决定暂时不碰它。",
+          "ops": [
+            {
+              "op": "trait",
+              "key": "谨慎"
+            }
+          ]
+        }
+      },
+      "once": true,
+      "weight": 1,
+      "requires": {
+        "items_all": [
+          "夜钥匙碎片"
+        ]
+      }
+    },
+    {
+      "id": "s_clock",
+      "location": "旧车站",
+      "title": "停在零点的时钟",
+      "text": "车站大钟停在00:00，秒针仍在颤动。",
+      "choices": {
+        "A": {
+          "text": "调整时间",
+          "result": "时针突然跳动。",
+          "ops": [
+            {
+              "op": "trait",
+              "key": "好奇"
+            },
+            {
+              "op": "stat",
+              "key": "hp",
+              "amount": -1,
+              "text": "体力-1"
+            }
+          ]
+        },
+        "B": {
+          "text": "拆下秒针",
+          "result": "你获得银秒针。",
+          "ops": [
+            {
+              "op": "item_add",
+              "item": "银秒针"
+            }
+          ]
+        },
+        "C": {
+          "text": "不碰",
+          "result": "你没有惊动它。",
+          "ops": [
+            {
+              "op": "trait",
+              "key": "谨慎"
+            }
+          ]
+        }
+      },
+      "once": true,
+      "weight": 1
+    },
+    {
+      "id": "s_ticket",
+      "location": "旧车站",
+      "title": "无人的售票窗口",
+      "text": "窗口后面亮着灯，桌上摆着一张空白车票。",
+      "choices": {
+        "A": {
+          "text": "拿走车票",
+          "result": "空白车票落进你手里。",
+          "ops": [
+            {
+              "op": "item_add",
+              "item": "空白车票"
+            }
+          ]
+        },
+        "B": {
+          "text": "敲窗",
+          "result": "窗口后的声音卖给你一条线索。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "coins",
+              "amount": -2,
+              "text": "金币-2"
+            },
+            {
+              "op": "stat",
+              "key": "clues",
+              "amount": 1,
+              "text": "线索+1"
+            }
+          ]
+        },
+        "C": {
+          "text": "离开",
+          "result": "你没有停留。",
+          "ops": []
+        }
+      },
+      "once": true,
+      "weight": 1
+    },
+    {
+      "id": "s_train",
+      "location": "旧车站",
+      "title": "只到终点的列车",
+      "text": "无声列车停靠，车厢里没有乘客。",
+      "choices": {
+        "A": {
+          "text": "上车",
+          "result": "列车带你穿过不存在的隧道。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "hp",
+              "amount": -2,
+              "text": "体力-2"
+            },
+            {
+              "op": "item_add",
+              "item": "终点石"
+            },
+            {
+              "op": "trait",
+              "key": "勇敢"
+            }
+          ]
+        },
+        "B": {
+          "text": "检查车厢",
+          "result": "你找到一只遗失行李。",
+          "ops": [
+            {
+              "op": "item_add",
+              "item": "遗失行李"
+            }
+          ]
+        },
+        "C": {
+          "text": "等待",
+          "result": "列车消失，留下句子：终点不在地图上。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "clues",
+              "amount": 1,
+              "text": "线索+1"
+            }
+          ]
+        }
+      },
+      "once": false,
+      "weight": 2
+    },
+    {
+      "id": "s_machine",
+      "location": "旧车站",
+      "title": "自动贩卖机",
+      "text": "机器只卖：昨日雨水、陌生人的梦、未寄出的道歉。",
+      "choices": {
+        "A": {
+          "text": "买昨日雨水（3金币）",
+          "result": "你买下昨日雨水。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "coins",
+              "amount": -3,
+              "text": "金币-3"
+            },
+            {
+              "op": "item_add",
+              "item": "昨日雨水"
+            }
+          ]
+        },
+        "B": {
+          "text": "买陌生人的梦（5金币）",
+          "result": "你买下陌生人的梦。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "coins",
+              "amount": -5,
+              "text": "金币-5"
+            },
+            {
+              "op": "item_add",
+              "item": "陌生人的梦"
+            },
+            {
+              "op": "trait",
+              "key": "好奇"
+            }
+          ]
+        },
+        "C": {
+          "text": "买未寄出的道歉（2金币）",
+          "result": "你买下未寄出的道歉。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "coins",
+              "amount": -2,
+              "text": "金币-2"
+            },
+            {
+              "op": "item_add",
+              "item": "未寄出的道歉"
+            }
+          ]
+        }
+      },
+      "once": false,
+      "weight": 2
+    },
+    {
+      "id": "s_radio",
+      "location": "旧车站",
+      "title": "反复播放的广播",
+      "text": "广播不断重复：请不要等待不存在的列车。",
+      "choices": {
+        "A": {
+          "text": "关闭广播",
+          "result": "寂静里多出一条线索。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "clues",
+              "amount": 1,
+              "text": "线索+1"
+            }
+          ]
+        },
+        "B": {
+          "text": "回答广播",
+          "result": "广播回答：我们一直知道你在这里。",
+          "ops": [
+            {
+              "op": "flag",
+              "key": "radio_answered",
+              "value": true
+            },
+            {
+              "op": "trait",
+              "key": "好奇"
+            }
+          ]
+        },
+        "C": {
+          "text": "继续听",
+          "result": "你听见一个残缺站名。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "hp",
+              "amount": -1,
+              "text": "体力-1"
+            },
+            {
+              "op": "item_add",
+              "item": "站名残片"
+            }
+          ]
+        }
+      },
+      "once": true,
+      "weight": 1
+    },
+    {
+      "id": "s_lost",
+      "location": "旧车站",
+      "title": "遗失物招领处",
+      "text": "柜台里堆着许多失物，每一件都写着不同名字。",
+      "choices": {
+        "A": {
+          "text": "拿走写着自己名字的物品",
+          "result": "你获得一只旧怀表。",
+          "ops": [
+            {
+              "op": "item_add",
+              "item": "旧怀表"
+            },
+            {
+              "op": "flag",
+              "key": "recognized",
+              "value": true
+            },
+            {
+              "op": "trait",
+              "key": "好奇"
+            }
+          ]
+        },
+        "B": {
+          "text": "帮忙整理失物",
+          "result": "你得到管理员的信任。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "hp",
+              "amount": -1,
+              "text": "体力-1"
+            },
+            {
+              "op": "stat",
+              "key": "trust",
+              "amount": 1,
+              "text": "信任+1"
+            },
+            {
+              "op": "trait",
+              "key": "善意"
+            }
+          ]
+        },
+        "C": {
+          "text": "搜索值钱物品",
+          "result": "你翻找柜台。",
+          "ops": [
+            {
+              "op": "chance",
+              "branches": [
+                {
+                  "p": 0.6,
+                  "text": "你找到4枚金币。",
+                  "ops": [
+                    {
+                      "op": "stat",
+                      "key": "coins",
+                      "amount": 4,
+                      "text": "金币+4"
+                    },
+                    {
+                      "op": "trait",
+                      "key": "贪心"
+                    }
+                  ]
+                },
+                {
+                  "p": 0.4,
+                  "text": "警铃响起。",
+                  "ops": [
+                    {
+                      "op": "stat",
+                      "key": "hp",
+                      "amount": -1,
+                      "text": "体力-1"
+                    },
+                    {
+                      "op": "trait",
+                      "key": "贪心"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "once": false,
+      "weight": 2
+    },
+    {
+      "id": "s_staff",
+      "location": "旧车站",
+      "title": "没有脸的站务员",
+      "text": "站务员检查车票，但脸上只有一条细缝。",
+      "choices": {
+        "A": {
+          "text": "出示空白车票",
+          "result": "车票浮现出隐藏站台。",
+          "ops": [
+            {
+              "op": "flag",
+              "key": "hidden_platform",
+              "value": true
+            }
+          ],
+          "requires": {
+            "items_all": [
+              "空白车票"
+            ]
+          },
+          "blocked_text": "你没有空白车票。"
+        },
+        "B": {
+          "text": "用5金币贿赂",
+          "result": "站务员侧身让开。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "coins",
+              "amount": -5,
+              "text": "金币-5"
+            },
+            {
+              "op": "trait",
+              "key": "贪心"
+            }
+          ]
+        },
+        "C": {
+          "text": "转身逃跑",
+          "result": "你冲出站台。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "hp",
+              "amount": -2,
+              "text": "体力-2"
+            },
+            {
+              "op": "trait",
+              "key": "谨慎"
+            }
+          ]
+        }
+      },
+      "once": false,
+      "weight": 2
+    },
+    {
+      "id": "s_case",
+      "location": "旧车站",
+      "title": "锁住的行李箱",
+      "text": "旧皮箱里传来轻微敲击声。",
+      "choices": {
+        "A": {
+          "text": "用生锈钥匙打开",
+          "result": "锁扣弹开。",
+          "ops": [
+            {
+              "op": "item_remove",
+              "item": "生锈钥匙"
+            },
+            {
+              "op": "chance",
+              "branches": [
+                {
+                  "p": 0.5,
+                  "text": "里面是一件月台珍物。",
+                  "ops": [
+                    {
+                      "op": "item_add",
+                      "item": "月台珍物"
+                    }
+                  ]
+                },
+                {
+                  "p": 0.5,
+                  "text": "一团黑影从箱中窜出。",
+                  "ops": [
+                    {
+                      "op": "flag",
+                      "key": "unknown_creature",
+                      "value": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "requires": {
+            "items_all": [
+              "生锈钥匙"
+            ]
+          },
+          "blocked_text": "你没有生锈钥匙。"
+        },
+        "B": {
+          "text": "敲回去",
+          "result": "箱子回敲出一串密码。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "clues",
+              "amount": 1,
+              "text": "线索+1"
+            },
+            {
+              "op": "flag",
+              "key": "case_code",
+              "value": true
+            }
+          ]
+        },
+        "C": {
+          "text": "把皮箱带回营地",
+          "result": "你把皮箱带回小屋。",
+          "ops": [
+            {
+              "op": "item_add",
+              "item": "锁住的皮箱"
+            },
+            {
+              "op": "flag",
+              "key": "case_home",
+              "value": true
+            }
+          ]
+        }
+      },
+      "once": true,
+      "weight": 1
+    },
+    {
+      "id": "s_oldman",
+      "location": "旧车站",
+      "title": "最后一张长椅",
+      "text": "老人说自己已经等了三十年。",
+      "choices": {
+        "A": {
+          "text": "陪他坐一会儿",
+          "result": "老人讲起旧站往事。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "hp",
+              "amount": 1,
+              "text": "体力+1"
+            },
+            {
+              "op": "stat",
+              "key": "clues",
+              "amount": 1,
+              "text": "线索+1"
+            },
+            {
+              "op": "trait",
+              "key": "善意"
+            }
+          ]
+        },
+        "B": {
+          "text": "告诉他列车不会来",
+          "result": "老人消失，只留下旧站徽章。",
+          "ops": [
+            {
+              "op": "item_add",
+              "item": "旧站徽章"
+            }
+          ]
+        },
+        "C": {
+          "text": "问他终点在哪里",
+          "result": "老人说：把名字写在空白车票上。",
+          "ops": [
+            {
+              "op": "flag",
+              "key": "second_key_hint",
+              "value": true
+            },
+            {
+              "op": "stat",
+              "key": "clues",
+              "amount": 1,
+              "text": "线索+1"
+            }
+          ]
+        }
+      },
+      "once": true,
+      "weight": 1
+    },
+    {
+      "id": "s_bench",
+      "location": "旧车站",
+      "title": "空座位旁的纸袋",
+      "text": "纸袋里有一份仍然温热的面包。",
+      "choices": {
+        "A": {
+          "text": "拿走",
+          "result": "你获得一份食物。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "food",
+              "amount": 1,
+              "text": "食物+1"
+            },
+            {
+              "op": "trait",
+              "key": "贪心"
+            }
+          ]
+        },
+        "B": {
+          "text": "留下一枚金币",
+          "result": "你交换到温热面包。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "coins",
+              "amount": -1,
+              "text": "金币-1"
+            },
+            {
+              "op": "stat",
+              "key": "food",
+              "amount": 1,
+              "text": "食物+1"
+            },
+            {
+              "op": "trait",
+              "key": "善意"
+            }
+          ]
+        },
+        "C": {
+          "text": "不碰",
+          "result": "你继续前进。",
+          "ops": [
+            {
+              "op": "trait",
+              "key": "谨慎"
+            }
+          ]
+        }
+      },
+      "once": false,
+      "weight": 3
+    },
+    {
+      "id": "s_midnight",
+      "location": "旧车站",
+      "title": "午夜站台",
+      "text": "零点的风穿过站台，所有旧物开始轻轻震动。",
+      "choices": {
+        "A": {
+          "text": "将银秒针装回时钟",
+          "result": "时钟重新开始走动。",
+          "ops": [
+            {
+              "op": "item_remove",
+              "item": "银秒针"
+            },
+            {
+              "op": "flag",
+              "key": "midnight_train",
+              "value": true
+            }
+          ],
+          "requires": {
+            "items_all": [
+              "银秒针"
+            ]
+          }
+        },
+        "B": {
+          "text": "在车票上写下站名",
+          "result": "车票浮现金光。",
+          "ops": [
+            {
+              "op": "item_remove",
+              "item": "站名残片"
+            },
+            {
+              "op": "key",
+              "amount": 1
+            }
+          ],
+          "requires": {
+            "items_all": [
+              "空白车票",
+              "站名残片"
+            ]
+          },
+          "blocked_text": "缺少空白车票或站名残片。"
+        },
+        "C": {
+          "text": "什么都不做",
+          "result": "你决定下次再来。",
+          "ops": []
+        }
+      },
+      "once": true,
+      "weight": 1,
+      "requires": {
+        "flags_all": [
+          "hidden_platform"
+        ]
+      }
+    },
+    {
+      "id": "s_radio_reply",
+      "location": "旧车站",
+      "title": "广播的回信",
+      "text": "广播报出一个只属于你的站名。",
+      "choices": {
+        "A": {
+          "text": "记下站名",
+          "result": "你得到完整站名。",
+          "ops": [
+            {
+              "op": "item_add",
+              "item": "完整站名"
+            },
+            {
+              "op": "stat",
+              "key": "clues",
+              "amount": 1,
+              "text": "线索+1"
+            }
+          ]
+        },
+        "B": {
+          "text": "问它是谁",
+          "result": "广播里传来一声很轻的笑。",
+          "ops": [
+            {
+              "op": "trait",
+              "key": "好奇",
+              "amount": 2
+            },
+            {
+              "op": "flag",
+              "key": "radio_friend",
+              "value": true
+            }
+          ]
+        },
+        "C": {
+          "text": "切断电源",
+          "result": "广播彻底安静。",
+          "ops": [
+            {
+              "op": "trait",
+              "key": "谨慎"
+            },
+            {
+              "op": "flag",
+              "key": "radio_silenced",
+              "value": true
+            }
+          ]
+        }
+      },
+      "once": true,
+      "weight": 1,
+      "requires": {
+        "flags_all": [
+          "radio_answered"
+        ]
+      }
+    },
+    {
+      "id": "s_case_night",
+      "location": "旧车站",
+      "title": "皮箱里的乘客",
+      "text": "被带回小屋的皮箱在夜里自己打开了。",
+      "choices": {
+        "A": {
+          "text": "让里面的影子出来",
+          "result": "影子向你鞠躬，交出第三把夜钥匙。",
+          "ops": [
+            {
+              "op": "key",
+              "amount": 1
+            },
+            {
+              "op": "flag",
+              "key": "shadow_guest",
+              "value": true
+            },
+            {
+              "op": "trait",
+              "key": "勇敢",
+              "amount": 2
+            }
+          ]
+        },
+        "B": {
+          "text": "重新锁上",
+          "result": "敲击声停了。",
+          "ops": [
+            {
+              "op": "trait",
+              "key": "谨慎",
+              "amount": 2
+            }
+          ]
+        },
+        "C": {
+          "text": "与它交谈",
+          "result": "你获得一条关于沉睡湖的线索。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "clues",
+              "amount": 2,
+              "text": "线索+2"
+            },
+            {
+              "op": "trait",
+              "key": "好奇",
+              "amount": 2
+            }
+          ]
+        }
+      },
+      "once": true,
+      "weight": 1,
+      "requires": {
+        "flags_all": [
+          "case_home"
+        ]
+      }
+    },
+    {
+      "id": "s_final_ticket",
+      "location": "旧车站",
+      "title": "终点车票",
+      "text": "完整站名自行浮现在空白车票上。",
+      "choices": {
+        "A": {
+          "text": "撕下车票",
+          "result": "车票化成一把夜钥匙。",
+          "ops": [
+            {
+              "op": "key",
+              "amount": 1
+            },
+            {
+              "op": "item_remove",
+              "item": "完整站名"
+            },
+            {
+              "op": "flag",
+              "key": "ticket_key_done",
+              "value": true
+            }
+          ]
+        },
+        "B": {
+          "text": "登上列车",
+          "result": "列车带你看见沉睡湖的一角。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "clues",
+              "amount": 2,
+              "text": "线索+2"
+            },
+            {
+              "op": "trait",
+              "key": "勇敢"
+            }
+          ]
+        },
+        "C": {
+          "text": "把车票留给老人",
+          "result": "长椅上多出一束白花。",
+          "ops": [
+            {
+              "op": "trait",
+              "key": "善意",
+              "amount": 2
+            },
+            {
+              "op": "item_add",
+              "item": "白花"
+            }
+          ]
+        }
+      },
+      "once": true,
+      "weight": 1,
+      "requires": {
+        "items_all": [
+          "空白车票",
+          "完整站名"
+        ]
+      }
+    },
+    {
+      "id": "l_gate",
+      "location": "沉睡湖",
+      "title": "湖门",
+      "text": "三把夜钥匙同时发热，湖面升起一扇门。",
+      "choices": {
+        "A": {
+          "text": "推开湖门",
+          "result": "门后传来无数人的低语。",
+          "ops": [
+            {
+              "op": "flag",
+              "key": "lake_gate_open",
+              "value": true
+            },
+            {
+              "op": "trait",
+              "key": "勇敢"
+            }
+          ]
+        },
+        "B": {
+          "text": "先绕湖观察",
+          "result": "你发现岸边留着许多旧脚印。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "clues",
+              "amount": 2,
+              "text": "线索+2"
+            },
+            {
+              "op": "trait",
+              "key": "谨慎"
+            }
+          ]
+        },
+        "C": {
+          "text": "把钥匙放回水边",
+          "result": "湖面安静下来。",
+          "ops": [
+            {
+              "op": "trait",
+              "key": "善意"
+            }
+          ]
+        }
+      },
+      "once": true,
+      "weight": 1,
+      "requires": {
+        "night_keys_min": 3
+      }
+    },
+    {
+      "id": "l_guard",
+      "location": "沉睡湖",
+      "title": "守望者们",
+      "text": "曾被你帮助过的人和生物出现在湖岸。",
+      "choices": {
+        "A": {
+          "text": "让他们与你同行",
+          "result": "所有微光汇成一条安全的路。",
+          "ops": [
+            {
+              "op": "ending",
+              "ending": "守望结局",
+              "text": "达成结局：守望。你带着所有被帮助过的生命走过湖门。"
+            }
+          ]
+        },
+        "B": {
+          "text": "让他们留在岸边",
+          "result": "你独自走向湖心。",
+          "ops": [
+            {
+              "op": "trait",
+              "key": "勇敢"
+            }
+          ]
+        },
+        "C": {
+          "text": "把夜钥匙交给他们",
+          "result": "湖门从此由守望者看护。",
+          "ops": [
+            {
+              "op": "ending",
+              "ending": "归途结局",
+              "text": "达成结局：归途。湖门被妥善封存，你回到林间小屋。"
+            }
+          ]
+        }
+      },
+      "once": true,
+      "weight": 1,
+      "requires": {
+        "flags_all": [
+          "lake_gate_open"
+        ],
+        "traits_min": {
+          "善意": 5
+        }
+      }
+    },
+    {
+      "id": "l_depth",
+      "location": "沉睡湖",
+      "title": "湖底的光",
+      "text": "湖底有一团像星星一样呼吸的光。",
+      "choices": {
+        "A": {
+          "text": "潜入最深处",
+          "result": "你看见夜钥匙真正打开的是记忆本身。",
+          "ops": [
+            {
+              "op": "ending",
+              "ending": "逐光结局",
+              "text": "达成结局：逐光。你带着湖底的光返回漫游世界。"
+            }
+          ]
+        },
+        "B": {
+          "text": "带走湖底宝物",
+          "result": "宝物很沉，湖门在身后关闭。",
+          "ops": [
+            {
+              "op": "ending",
+              "ending": "沉湖结局",
+              "text": "达成隐藏结局：沉湖。你得到了宝物，也被永远留在湖中。"
+            }
+          ]
+        },
+        "C": {
+          "text": "只记录，不带走",
+          "result": "你将湖底秘密写进夜行日记。",
+          "ops": [
+            {
+              "op": "stat",
+              "key": "clues",
+              "amount": 3,
+              "text": "线索+3"
+            },
+            {
+              "op": "trait",
+              "key": "谨慎",
+              "amount": 2
+            }
+          ]
+        }
+      },
+      "once": true,
+      "weight": 1,
+      "requires": {
+        "flags_all": [
+          "lake_gate_open"
+        ]
+      }
+    },
+    {
+      "id": "l_after",
+      "location": "沉睡湖",
+      "title": "漫游之后",
+      "text": "主线已经结束，湖边仍有新的足迹出现。",
+      "choices": {
+        "A": {
+          "text": "继续漫游",
+          "result": "新的夜晚还会到来。",
+          "ops": [
+            {
+              "op": "flag",
+              "key": "wander_mode",
+              "value": true
+            }
+          ]
+        },
+        "B": {
+          "text": "回小屋整理收藏",
+          "result": "你把一路带回的东西陈列起来。",
+          "ops": [
+            {
+              "op": "heal_full",
+              "text": "体力完全恢复"
+            },
+            {
+              "op": "stat",
+              "key": "trust",
+              "amount": 1,
+              "text": "信任+1"
+            }
+          ]
+        },
+        "C": {
+          "text": "在湖边写一封信",
+          "result": "信被风带向尚未解锁的地图。",
+          "ops": [
+            {
+              "op": "item_add",
+              "item": "未寄出的湖边信"
+            }
+          ]
+        }
+      },
+      "once": false,
+      "weight": 3,
+      "requires": {
+        "main_story_complete": true
+      }
+    }
+  ]
+}
